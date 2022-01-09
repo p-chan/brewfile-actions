@@ -10,10 +10,23 @@ jobs:
       - name: checkout
         uses: actions/checkout@v2
 
-      - name: brew bundle
-        run: brew bundle
+      - name: brew install
+        run: brew bundle --file Brewfiles/Brewfile
         env:
           CI: true
+
+      - name: cask install
+        run: brew bundle --file Brewfiles/Caskfile
+        env:
+          CI: true
+
+      - name: mas install
+        run: |
+          mas signin $MAS_ID $MAS_PASSWORD
+          brew bundle --file Brewfiles/Masfile
+        env:
+          MAS_ID: ${{ secrets.MAS_ID }}
+          MAS_PASSWORD: ${{ secrets.MAS_PASSWORD }}
 
       - name: check
         run: |

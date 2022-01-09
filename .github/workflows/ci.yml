@@ -20,14 +20,6 @@ jobs:
         env:
           CI: true
 
-      - name: mas install
-        run: |
-          mas signin $MAS_ID $MAS_PASSWORD
-          brew bundle --file Brewfiles/Masfile
-        env:
-          MAS_ID: ${{ secrets.MAS_ID }}
-          MAS_PASSWORD: ${{ secrets.MAS_PASSWORD }}
-
       - name: check
         run: |
           mas version
